@@ -35,8 +35,8 @@
 							<div class="inner">
 								<h1>ESX Scheme Readme</h1>
 								<p>A <a href="https://bon.engineering">BON Engineering</a> initiative aimed towards wireless network engineers with a<br />
-								desire to understand the Ekahau project file Schema, and how to automate tasks against it.</p>
-								<p>Click <b>[ SCHEMA ]</b> below to go straight to the schema diagram.</p>
+								desire to understand the Ekahau project file Schema and how to automate tasks against it.</p>
+								<p>Click <b><a href="schema.html">[ SCHEMA ]</a></b> below to go straight to the schema diagram.</p>
 							</div>
 						</div>
 						<nav>
@@ -57,77 +57,48 @@
 							<article id="about">
 								<h2 class="major">About Us</h2>
 								<!--<span class="image main"><img src="images/pic01.jpg" alt="" /></span> -->
-								<p>BON Engineering provides tailored solutions specialising in industrial, hospitality, medical, and enterprise domains.  Focusing heavily into devops practices, we have a competetive advantage over our competitors with a more traditional approach to networking services.</p>
-								<p>The Ekahau Schema website is an example of how we differ to the traditional approach.  By focusing on understanding the structure of our tools, we are able to develop tools to automate aspects of a typical project minimising human error and delivering results faster and cheaper.</p>
-								<p>For more information on our different services (including devops consultancy & script development), or to contact us, visit <a href="https://bon.engineering">bon.engineering</a></p>
+								<p>BON Engineering provides tailored solutions specialising in industrial, hospitality, medical, and enterprise domains.  Focusing heavily on DevOps practices, we have a competitive advantage over our competitors with a more traditional approach to networking services.</p>
+								<p>The Ekahau Schema website is an example of how we differ from the traditional approach.  By focusing on understanding the structure of our tools, we can develop tools to automate aspects of a typical project minimising human error and delivering results faster and cheaper.</p>
+								<p>For more information on our different services (including DevOps consultancy & script development), or to contact us, visit <a href="https://bon.engineering">bon.engineering</a></p>
 							</article>
 
 						<!-- Work -->
 							<article id="schema">
-								<h2 class="major">Understanding the Schema</h2>
-								<span class="image main"><img src="images/schema_example.jpg" alt="" /></span>
-								<p>An Ekahau project file is composed of many JSON files that link together through the use of different IDs.  Understanding the mapping of these JSON files is crucial when developing a script to interrogate these JSON files.</p>
-								<p>
-									As an example (and using the graphic above), to discover the technologies used for a specific measured access point you need to know the following information:<br>
-									<ul>
-										<li>Access Point Name</li>
-										<li>Access Point ID</li>
-										<li>Measured Radio ID</li>
-									</ul>
-								</p>
-								<p>We find that most of the time, you begin within the accessPoint.json file.  However, you are not limited to starting at this file.  There are also JSON files that are not interlinked with accessPoints.json (project.json for example)</p>
-								<p>The best way to better understand the schema is to explore it.  Head over to <a href="https://esx.bon.engineering">esx.bon.engineering</a> and have a look around, alternatively take a look at the use cases shown on this website</p>
+							   <h2 class="major">Understanding the Schema</h2>
+							   <span class="image main"><img src="images/schema_example.jpg" alt="" /></span>
+							   <p>An Ekahau project file consists of many JSON files that link together using different IDs.  Understanding the mapping of these JSON files is crucial when developing a script to interrogate these JSON files.</p>
+							   <p>
+								  As an example (and using the graphic above), to discover the technologies used for a specific measured access point you need to know the following information:<br>
+								  <ul>
+									 <li>Access Point Name</li>
+									 <li>Access Point ID</li>
+									 <li>Measured Radio ID</li>
+								  </ul>
+							   </p>
+							   <p>We find that most of the time, you begin within the accessPoint.json file.  However, you are not limited to starting at this file.  There are also JSON files that are not connected with accessPoints.json (project.json for example)</p>
+							   <p>The best way to better understand the schema is to explore it.  Head over to <a href="https://esx.bon.engineering">esx.bon.engineering</a> and have a look around, alternatively take a look at the use cases shown on this website</p>
 							</article>
+
 
 						<!-- About -->
 							<article id="usecase">
-								<h2 class="major">Use Cases</h2>
-								<h3>Ekahau Cloud "User" Unifier</h3>
-								<span class="image main"><img src="images/createdby.jpg" alt="" /></span>
-								<p>Many of our customers own Ekahau subscriptions, and utilise the Ekahau Cloud.  Ekahau Cloud will read the project file and display to their users information such as who performed the survey or added a note.  </p>
-								<p>At BON, we wanted all of our project files to show a uniformed response to this query, and have developed a small script which will rename these fields to "BON Engineering" (Whereas it would normally display the name of the person the software is licensed to).  This is seen in the screenshot above.</p>
-								<h3>Ekahau Remote RF Checker</h3>
-								<p>There are many caveats with this initiative, as you will identify yourself throughout the explanation.</p>
-								<p>Using a predictive design, update the transmit power and channel allocation of each access point.  This is done by connecting to the wireless controller and retreiving the information on a weekly basis, and then updating the Ekahau project file.</p>
-								<p>This helps operation teams to monitor the status of the RF in a particular site based on real world values</p>
-								<p><b>Some caveats to get you started:</b><ul style="font-size:15px; margin-top: -30px;">
-								<i> <li>Design must be validated against a passive survey to ensure accuracy</li>
-									<li>Initiative assumes the physical attributes of the site remain the same, no major changes within the facility</li>
-									<li>Should not be used as a replacement to a passive survey (does not account for neighbouring access points for example)</li>
-								</ul></i>
-								</p>
+							   <h2 class="major">Use Cases</h2>
+							   <h3>Ekahau Cloud "User" Unifier</h3>
+							   <span class="image main"><img src="images/createdby.jpg" alt="" /></span>
+							   <p>Many of our customers own Ekahau subscriptions and utilise the Ekahau Cloud.  Ekahau Cloud will read the project file and display information such as who performed the survey or added a note.  </p>
+							   <p>At BON, we wanted all of our project files to show a uniform response to this query, and have developed a small script that will rename these fields to "BON Engineering" (Whereas it would normally display the name of the person the software is licensed to).  This is seen in the screenshot above.</p>
+							   <h3>Ekahau Remote RF Checker</h3>
+							   <p>There are many caveats with this initiative, as you will identify yourself throughout the explanation.</p>
+							   <p>Using a predictive design, update the transmit power and channel allocation of each access point.  This is done by connecting to the wireless controller and retrieving the information weekly and updating the Ekahau project file.</p>
+							   <p>This helps operation teams to monitor the status of the RF in a particular site based on real-world values</p>
+							   <p>Some caveats to get you started:<ul style="font-size:15px; margin-top: -30px;">
+							   <i> <li>Design must be validated against a passive survey to demonstrate and ensure accuracy</li>
+								  <li>Initiative assumes the physical attributes of the site remain the same, with no major changes within the facility</li>
+								  <li>Should not be used as a replacement to a passive survey (does not account for neighbouring access points for example)</li>
+							   </ul></i>
+							   </p>
 							</article>
 
-						<!-- Contact -->
-							<article id="contact">
-								<h2 class="major">Contact</h2>
-								<form method="post" action="#">
-									<div class="fields">
-										<div class="field half">
-											<label for="name">Name</label>
-											<input type="text" name="name" id="name" />
-										</div>
-										<div class="field half">
-											<label for="email">Email</label>
-											<input type="text" name="email" id="email" />
-										</div>
-										<div class="field">
-											<label for="message">Message</label>
-											<textarea name="message" id="message" rows="4"></textarea>
-										</div>
-									</div>
-									<ul class="actions">
-										<li><input type="submit" value="Send Message" class="primary" /></li>
-										<li><input type="reset" value="Reset" /></li>
-									</ul>
-								</form>
-								<ul class="icons">
-									<li><a href="#" class="icon brands fa-twitter"><span class="label">Twitter</span></a></li>
-									<li><a href="#" class="icon brands fa-facebook-f"><span class="label">Facebook</span></a></li>
-									<li><a href="#" class="icon brands fa-instagram"><span class="label">Instagram</span></a></li>
-									<li><a href="#" class="icon brands fa-github"><span class="label">GitHub</span></a></li>
-								</ul>
-							</article>
 
 						<!-- Elements -->
 							<article id="elements">
