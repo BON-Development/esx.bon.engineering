@@ -1,0 +1,201 @@
+/* ============================================================
+   ESX Schema — BON Engineering
+   Shared design system: light, engineering-doc, blue-on-white
+   ============================================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap');
+
+:root {
+  /* Surfaces */
+  --paper:      #FBFBFD;
+  --surface:    #FFFFFF;
+  --surface-2:  #F4F6FA;
+  --surface-3:  #EDF1F6;
+  --line:       #E4E8EF;
+  --line-2:     #D4DAE3;
+
+  /* Ink */
+  --ink:    #11151C;
+  --ink-2:  #39424F;
+  --ink-3:  #6A7481;
+  --ink-4:  #98A1AD;
+
+  /* Brand blue (carried from the schema viewer) */
+  --blue:       #0B6FE8;
+  --blue-ink:   #0A56B6;
+  --blue-soft:  #4F9BF2;
+  --sky:        #29A7F0;
+  --wash:       #EAF2FE;
+  --wash-2:     #F2F7FE;
+
+  /* Functional accents (same chroma family) */
+  --pk:    #C9821B;   /* primary key  */
+  --fk:    #1F9D74;   /* foreign key  */
+
+  /* Type */
+  --f-display: 'Space Grotesk', system-ui, sans-serif;
+  --f-sans:    'IBM Plex Sans', system-ui, sans-serif;
+  --f-mono:    'IBM Plex Mono', ui-monospace, monospace;
+
+  /* Radius + shadow */
+  --r-sm: 5px;
+  --r:    8px;
+  --r-lg: 14px;
+  --sh-1: 0 1px 2px rgba(17,21,28,.05), 0 1px 1px rgba(17,21,28,.04);
+  --sh-2: 0 4px 18px -6px rgba(17,21,28,.14), 0 2px 6px -2px rgba(17,21,28,.06);
+  --sh-3: 0 18px 50px -18px rgba(11,111,232,.30), 0 8px 24px -12px rgba(17,21,28,.12);
+
+  --maxw: 1180px;
+}
+
+* { box-sizing: border-box; }
+
+html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  font-family: var(--f-sans);
+  background: var(--paper);
+  color: var(--ink-2);
+  font-size: 16px;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+h1, h2, h3, h4 {
+  font-family: var(--f-display);
+  color: var(--ink);
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  margin: 0;
+  font-weight: 600;
+  text-wrap: balance;
+}
+
+p { margin: 0; text-wrap: pretty; }
+
+a { color: var(--blue); text-decoration: none; }
+a:hover { color: var(--blue-ink); }
+
+::selection { background: var(--blue); color: #fff; }
+
+/* ---- Mono kicker / label ---- */
+.kicker {
+  font-family: var(--f-mono);
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--blue);
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+.kicker::before {
+  content: "";
+  width: 18px; height: 1.5px;
+  background: var(--blue);
+  display: inline-block;
+}
+.kicker.plain::before { display: none; }
+
+/* ---- Buttons ---- */
+.btn {
+  font-family: var(--f-sans);
+  font-weight: 600;
+  font-size: 15px;
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  padding: 12px 20px;
+  border-radius: var(--r-sm);
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: all .16s ease;
+  white-space: nowrap;
+  line-height: 1;
+}
+.btn .arrow { transition: transform .18s ease; }
+.btn:hover .arrow { transform: translateX(3px); }
+.btn-primary {
+  background: var(--blue);
+  color: #fff;
+  box-shadow: 0 1px 2px rgba(11,111,232,.35), inset 0 1px 0 rgba(255,255,255,.18);
+}
+.btn-primary:hover { background: var(--blue-ink); color: #fff; box-shadow: var(--sh-3); transform: translateY(-1px); }
+.btn-ghost {
+  background: var(--surface);
+  color: var(--ink);
+  border-color: var(--line-2);
+}
+.btn-ghost:hover { border-color: var(--blue-soft); color: var(--blue-ink); background: var(--wash-2); }
+.btn-sm { padding: 9px 14px; font-size: 13.5px; }
+
+/* ---- Chips / badges ---- */
+.badge {
+  font-family: var(--f-mono);
+  font-size: 10.5px;
+  font-weight: 600;
+  letter-spacing: .04em;
+  padding: 2px 6px;
+  border-radius: 4px;
+  text-transform: uppercase;
+  line-height: 1.4;
+  display: inline-block;
+}
+.badge-pk { background: rgba(201,130,27,.13); color: var(--pk); }
+.badge-fk { background: rgba(31,157,116,.13); color: var(--fk); }
+.badge-list { background: var(--surface-3); color: var(--ink-3); }
+.badge-blue { background: var(--wash); color: var(--blue-ink); }
+
+/* ---- Layout helpers ---- */
+.wrap { max-width: var(--maxw); margin: 0 auto; padding: 0 32px; }
+.section { padding: 96px 0; }
+.eyebrow-row { display: flex; align-items: center; gap: 14px; margin-bottom: 18px; }
+
+/* ---- Site header ---- */
+.site-header {
+  position: sticky; top: 0; z-index: 50;
+  background: rgba(251,251,253,.82);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--line);
+}
+.site-header .wrap {
+  display: flex; align-items: center; gap: 28px;
+  height: 64px;
+}
+.brand { display: flex; align-items: center; gap: 11px; color: var(--ink); }
+.brand:hover { color: var(--ink); }
+.brand-mark {
+  width: 30px; height: 30px; flex: none;
+  display: grid; place-items: center;
+}
+.brand-name { font-family: var(--f-display); font-weight: 700; font-size: 17px; letter-spacing: -0.01em; }
+.brand-name span { color: var(--ink-3); font-weight: 500; }
+.site-nav { display: flex; align-items: center; gap: 4px; margin-left: auto; }
+.site-nav a {
+  font-size: 14.5px; font-weight: 500; color: var(--ink-2);
+  padding: 8px 13px; border-radius: var(--r-sm);
+  white-space: nowrap;
+}
+.site-nav a:hover { color: var(--ink); background: var(--surface-2); }
+.nav-divider { width: 1px; height: 22px; background: var(--line-2); margin: 0 8px; }
+
+/* ---- Footer ---- */
+.site-footer {
+  border-top: 1px solid var(--line);
+  background: var(--surface);
+  padding: 56px 0 40px;
+}
+.footer-grid { display: flex; flex-wrap: wrap; gap: 40px; justify-content: space-between; }
+.footer-col h4 { font-family: var(--f-mono); font-size: 11px; letter-spacing: .12em; text-transform: uppercase; color: var(--ink-4); margin-bottom: 14px; font-weight: 600; }
+.footer-col a { display: block; color: var(--ink-2); font-size: 14.5px; padding: 4px 0; }
+.footer-col a:hover { color: var(--blue); }
+.footer-bottom { margin-top: 40px; padding-top: 22px; border-top: 1px solid var(--line); display: flex; flex-wrap: wrap; gap: 12px; justify-content: space-between; color: var(--ink-4); font-size: 13px; font-family: var(--f-mono); }
+
+@media (max-width: 820px) {
+  .wrap { padding: 0 20px; }
+  .section { padding: 64px 0; }
+  .site-nav .hide-sm { display: none; }
+}

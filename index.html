@@ -1,366 +1,232 @@
-<!DOCTYPE HTML>
-<!--
-	Dimension by HTML5 UP
-	html5up.net | @ajlkn
-	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
--->
-<html>
-	<head>
-		<script async src="https://www.googletagmanager.com/gtag/js?id=G-JG11QW20EJ"></script>
-		<script>
-		  window.dataLayer = window.dataLayer || [];
-		  function gtag(){dataLayer.push(arguments);}
-		  gtag('js', new Date());
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-JG11QW20EJ"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-JG11QW20EJ');
+</script>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>ESX Schema 1.9.0 | BON Engineering</title>
+<meta name="description" content="An interactive map of the Ekahau project file (.esx) schema — every JSON file, field, and relationship — built for wireless engineers who want to automate against it." />
+<link rel="stylesheet" href="styles.css" />
+<link rel="stylesheet" href="landing.css" />
+</head>
+<body>
 
-		  gtag('config', 'G-JG11QW20EJ');
-		</script>
-		<title>ESX Schema 1.9.0 | BON.engineering</title>
-		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-		<link rel="stylesheet" href="assets/css/main.css" />
-		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+<!-- ============ HEADER ============ -->
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="index.html" aria-label="ESX Schema home">
+      <span class="brand-mark" aria-hidden="true">
+        <svg width="30" height="30" viewBox="0 0 30 30" fill="none">
+          <rect x="1" y="1" width="28" height="28" rx="7" fill="#0B6FE8"/>
+          <circle cx="9" cy="9" r="2.4" fill="#fff"/>
+          <circle cx="21" cy="11" r="2.4" fill="#fff"/>
+          <circle cx="14" cy="21" r="2.4" fill="#fff"/>
+          <path d="M9 9 L21 11 M21 11 L14 21 M14 21 L9 9" stroke="#fff" stroke-width="1.3" stroke-opacity=".75"/>
+        </svg>
+      </span>
+      <span class="brand-name">ESX&nbsp;Schema <span>· BON</span></span>
+    </a>
+    <nav class="site-nav">
+      <a class="hide-sm" href="#what">What it is</a>
+      <a class="hide-sm" href="#howto">How to read it</a>
+      <a class="hide-sm" href="#explore">Files</a>
+      <a class="hide-sm" href="#usecases">Use cases</a>
+      <span class="nav-divider hide-sm"></span>
+      <a class="btn btn-primary btn-sm" href="schema.html">Open schema map <span class="arrow">→</span></a>
+    </nav>
+  </div>
+</header>
 
-	</head>
-	<body class="is-preload">
+<!-- ============ HERO ============ -->
+<section class="hero">
+  <div class="wrap hero-grid">
+    <div class="hero-copy">
+      <div class="eyebrow-row">
+        <span class="kicker">Ekahau&nbsp;.esx · Schema v1.9.0</span>
+      </div>
+      <h1>The Ekahau project file,<br/>mapped field&#8209;by&#8209;field.</h1>
+      <p class="hero-sub">An <code>.esx</code> file is a bundle of JSON documents wired together by IDs. We reverse-engineered the whole schema so you can stop guessing and start automating — <strong>36 files, 339 fields, 36 relationships</strong>, all explorable.</p>
+      <div class="hero-cta">
+        <a class="btn btn-primary" href="schema.html">Explore the schema map <span class="arrow">→</span></a>
+        <a class="btn btn-ghost" href="#what">How it fits together</a>
+      </div>
+      <div class="hero-stats">
+        <div class="stat"><span class="stat-n" data-count="36">36</span><span class="stat-l">JSON files</span></div>
+        <div class="stat"><span class="stat-n" data-count="339">339</span><span class="stat-l">Fields mapped</span></div>
+        <div class="stat"><span class="stat-n" data-count="36">36</span><span class="stat-l">Relationships</span></div>
+      </div>
+    </div>
+    <div class="hero-viz">
+      <canvas id="hero-canvas"></canvas>
+      <div class="hero-viz-tag"><span class="dot"></span>live schema graph</div>
+    </div>
+  </div>
+</section>
 
-		<!-- Wrapper -->
-			<div id="wrapper">
+<!-- ============ WHAT IT IS ============ -->
+<section class="section" id="what">
+  <div class="wrap">
+    <div class="eyebrow-row"><span class="kicker">What you're looking at</span></div>
+    <div class="what-head">
+      <h2>An <code>.esx</code> file is a graph, not a document.</h2>
+      <p class="lead">Rename it to <code>.zip</code> and you'll find a folder of JSON files. None of them mean much alone — the value is in how they reference each other by ID. Learn the wiring once and every automation gets easier.</p>
+    </div>
+    <div class="what-grid">
+      <article class="what-card">
+        <div class="wc-num">01</div>
+        <h3>Many small files</h3>
+        <p>Access points, radios, floor plans, notes, surveys — each concern lives in its own JSON document like <code>accessPoints.json</code>.</p>
+      </article>
+      <article class="what-card">
+        <div class="wc-num">02</div>
+        <h3>Linked by IDs</h3>
+        <p>Files point at each other through <code>id</code> / <code>...Id</code> fields. A measured radio knows its access point; an AP knows its floor plan.</p>
+      </article>
+      <article class="what-card">
+        <div class="wc-num">03</div>
+        <h3>Traversable</h3>
+        <p>Follow the relationships and you can answer real questions — which technologies a measured AP supports, what floor a note sits on, and more.</p>
+      </article>
+    </div>
+  </div>
+</section>
 
-				<!-- Header -->
-					<header id="header">
-						<div class="logo">
-							<span class="fas fa-wifi"></span>
-						</div>
-						<div class="content">
-							<div class="inner">
-								<h1>ESX Schema Readme</h1>
-								<p>A <a href="https://bon.engineering">BON Engineering</a> initiative aimed towards wireless network engineers with a<br />
-								desire to understand the Ekahau project file Schema and how to automate tasks against it.</p>
-								<p>While you're here, check out our new blog, <a href="https://signalvortex.com">Signal Vortex</a></p>
-								<p>Click <b><a href="schema.html">[ SCHEMA ]</a></b> below to go straight to the schema diagram.</p>
-							</div>
-						</div>
-						<nav>
-							<ul>
-								<li><a href="#about">About Us</a></li>
-								<li><a href="#schema">How To</a></li>
-								<li><a href="#usecase">Use Cases</a></li>
-								<li style="color: #ffffff; font-weight: bold"><a href="schema.html">[ Schema ]</a></li>
-								<!--<li><a href="#elements">Elements</a></li>-->
-							</ul>
-						</nav>
-					</header>
+<!-- ============ HOW TO READ IT ============ -->
+<section class="section howto" id="howto">
+  <div class="wrap">
+    <div class="eyebrow-row"><span class="kicker">How to read it</span></div>
+    <div class="howto-head">
+      <h2>Worked example: find an AP's technologies</h2>
+      <p class="lead">Say you have an access point name and want the radio technologies it measured. You hop across three files, matched on IDs. This is exactly the kind of path the schema map makes obvious.</p>
+    </div>
+    <div class="path">
+      <div class="path-step">
+        <div class="ps-file">accessPoints.json</div>
+        <div class="ps-key"><span class="badge badge-blue">name → id</span></div>
+        <p class="ps-note">Start with the AP name, read its <code>id</code>.</p>
+      </div>
+      <div class="path-link" aria-hidden="true">
+        <span class="pl-label">accessPointId</span>
+        <svg viewBox="0 0 60 24" width="60" height="24"><path d="M2 12 H50" stroke="#4F9BF2" stroke-width="1.5"/><path d="M46 6 L54 12 L46 18" fill="none" stroke="#4F9BF2" stroke-width="1.5"/></svg>
+      </div>
+      <div class="path-step">
+        <div class="ps-file">measuredRadios.json</div>
+        <div class="ps-key"><span class="badge badge-blue">accessPointId</span></div>
+        <p class="ps-note">Match on <code>accessPointId</code>, collect <code>accessPointMeasurementIds</code>.</p>
+      </div>
+      <div class="path-link" aria-hidden="true">
+        <span class="pl-label">measurementId</span>
+        <svg viewBox="0 0 60 24" width="60" height="24"><path d="M2 12 H50" stroke="#4F9BF2" stroke-width="1.5"/><path d="M46 6 L54 12 L46 18" fill="none" stroke="#4F9BF2" stroke-width="1.5"/></svg>
+      </div>
+      <div class="path-step">
+        <div class="ps-file">accessPointMeasurements.json</div>
+        <div class="ps-key"><span class="badge badge-fk">technologies</span></div>
+        <p class="ps-note">Read <code>technologies</code> — that's your answer.</p>
+      </div>
+    </div>
+    <p class="howto-foot">Most journeys start at <code>accessPoints.json</code>, but you don't have to — some files (like <code>project.json</code>) stand on their own. <a href="schema.html">Open the map →</a></p>
+  </div>
+</section>
 
-				<!-- Main -->
-					<div id="main">
+<!-- ============ EXPLORE / FILES ============ -->
+<section class="section explore" id="explore">
+  <div class="wrap">
+    <div class="eyebrow-row"><span class="kicker">The 36 files</span></div>
+    <div class="explore-head">
+      <h2>Search the schema</h2>
+      <p class="lead">Every JSON document in a 1.9.0 project, with field counts. Jump straight into any one inside the interactive map.</p>
+    </div>
+    <div class="search-box">
+      <svg class="search-ic" viewBox="0 0 20 20" width="18" height="18" fill="none"><circle cx="9" cy="9" r="6.2" stroke="#6A7481" stroke-width="1.6"/><path d="M13.5 13.5 L17.5 17.5" stroke="#6A7481" stroke-width="1.6" stroke-linecap="round"/></svg>
+      <input id="file-search" type="text" placeholder="Filter files and fields…  e.g. floorPlan, antenna, noteIds" autocomplete="off" spellcheck="false" />
+      <span id="search-count" class="search-count"></span>
+    </div>
+    <div id="file-list" class="file-list"></div>
+  </div>
+</section>
 
-						<!-- Intro -->
-							<article id="about">
-								<h2 class="major">About Us</h2>
-								<!--<span class="image main"><img src="images/pic01.jpg" alt="" /></span> -->
-								<p>BON Engineering provides tailored solutions specialising in industrial, hospitality, medical, and enterprise domains.  Focusing heavily on DevOps practices, we have a competitive advantage over our competitors with a more traditional approach to networking services.</p>
-								<p>The Ekahau Schema website is an example of how we differ from the traditional approach.  By focusing on understanding the structure of our tools, we can develop tools to automate aspects of a typical project minimising human error and delivering results faster and cheaper.</p>
-								<p>For more information on our different services (including DevOps consultancy & script development), or to contact us, visit <a href="https://bon.engineering">bon.engineering</a></p>
-								<p>Want to see how we are giving back to the tech community?  Check out <a href="https://signalvortex.com">Signal Vortex</a> now!</p>
-							</article>
+<!-- ============ USE CASES ============ -->
+<section class="section usecases" id="usecases">
+  <div class="wrap">
+    <div class="eyebrow-row"><span class="kicker">Why we built this</span></div>
+    <div class="explore-head">
+      <h2>What understanding the schema unlocks</h2>
+      <p class="lead">At BON we lean on DevOps practice over manual labour. Knowing the file structure lets us script the boring parts — fewer errors, faster delivery, lower cost.</p>
+    </div>
+    <div class="uc-grid">
+      <article class="uc-card">
+        <div class="uc-tag">Automation</div>
+        <h3>Ekahau Cloud user unifier</h3>
+        <p>Ekahau Cloud surfaces whoever performed a survey or left a note. A small script rewrites those <code>createdBy</code> fields to a uniform "BON Engineering", so every project speaks with one voice.</p>
+        <div class="uc-files"><span class="badge badge-list">notes.json</span><span class="badge badge-list">history.createdBy</span></div>
+      </article>
+      <article class="uc-card">
+        <div class="uc-tag">Operations</div>
+        <h3>Remote RF checker</h3>
+        <p>Pull live transmit power and channel allocation from the wireless controller weekly and write them back into the predictive design, giving ops a real-world view of site RF.</p>
+        <div class="uc-files"><span class="badge badge-list">simulatedRadios.json</span><span class="badge badge-list">transmitPower</span></div>
+        <p class="uc-caveat">Validate against a passive survey first — this complements, never replaces, real measurement.</p>
+      </article>
+    </div>
+  </div>
+</section>
 
-						<!-- Work -->
-							<article id="schema">
-							   <h2 class="major">Understanding the Schema</h2>
-							   <span class="image main"><img src="images/schema_example.jpg" alt="" /></span>
-							   <p>An Ekahau project file consists of many JSON files that link together using different IDs.  Understanding the mapping of these JSON files is crucial when developing a script to interrogate these JSON files.</p>
-							   <p>
-								  As an example (and using the graphic above), to discover the technologies used for a specific measured access point you need to know the following information:<br>
-								  <ul>
-									 <li>Access Point Name</li>
-									 <li>Access Point ID</li>
-									 <li>Measured Radio ID</li>
-								  </ul>
-							   </p>
-							   <p>We find that most of the time, you begin within the accessPoints.json file.  However, you are not limited to starting at this file.  There are also JSON files that are not connected with accessPoints.json (project.json for example)</p>
-							   <p>The best way to better understand the schema is to explore it.  Head over to <a href="https://esx.bon.engineering">esx.bon.engineering</a> and have a look around, alternatively take a look at the use cases shown on this website</p>
-							</article>
+<!-- ============ CTA ============ -->
+<section class="cta">
+  <div class="wrap cta-inner">
+    <div class="cta-glow" aria-hidden="true"></div>
+    <div class="eyebrow-row"><span class="kicker">Start exploring</span></div>
+    <h2>Open the interactive schema map.</h2>
+    <p>Pan the relationship graph, click any file to see its fields, keys and links. No install, no account.</p>
+    <div class="hero-cta">
+      <a class="btn btn-primary" href="schema.html">Launch the schema map <span class="arrow">→</span></a>
+      <a class="btn btn-ghost" href="https://bon.engineering" target="_blank" rel="noopener">Talk to BON Engineering</a>
+    </div>
+  </div>
+</section>
 
+<!-- ============ FOOTER ============ -->
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div class="footer-col" style="max-width:300px">
+        <a class="brand" href="index.html" style="margin-bottom:14px">
+          <span class="brand-mark" aria-hidden="true">
+            <svg width="30" height="30" viewBox="0 0 30 30" fill="none"><rect x="1" y="1" width="28" height="28" rx="7" fill="#0B6FE8"/><circle cx="9" cy="9" r="2.4" fill="#fff"/><circle cx="21" cy="11" r="2.4" fill="#fff"/><circle cx="14" cy="21" r="2.4" fill="#fff"/><path d="M9 9 L21 11 M21 11 L14 21 M14 21 L9 9" stroke="#fff" stroke-width="1.3" stroke-opacity=".75"/></svg>
+          </span>
+          <span class="brand-name">ESX&nbsp;Schema</span>
+        </a>
+        <p style="font-size:14px;color:var(--ink-3)">A BON Engineering initiative for wireless network engineers who want to understand — and automate against — the Ekahau project file.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Explore</h4>
+        <a href="schema.html">Schema map</a>
+        <a href="#what">What it is</a>
+        <a href="#howto">How to read it</a>
+        <a href="#explore">All files</a>
+      </div>
+      <div class="footer-col">
+        <h4>BON</h4>
+        <a href="https://bon.engineering" target="_blank" rel="noopener">bon.engineering</a>
+        <a href="https://signalvortex.com" target="_blank" rel="noopener">Signal Vortex blog</a>
+        <a href="privacy-policy.html">Privacy policy</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© <span id="year"></span> BON Engineering</span>
+      <span>Schema v1.9.0 · not affiliated with Ekahau / Ookla</span>
+    </div>
+  </div>
+</footer>
 
-						<!-- About -->
-							<article id="usecase">
-							   <h2 class="major">Use Cases</h2>
-							   <h3>Ekahau Cloud "User" Unifier</h3>
-							   <span class="image main"><img src="images/createdby.jpg" alt="" /></span>
-							   <p>Many of our customers own Ekahau subscriptions and utilise the Ekahau Cloud.  Ekahau Cloud will read the project file and display information such as who performed the survey or added a note.  </p>
-							   <p>At BON, we wanted all of our project files to show a uniform response to this query, and have developed a small script that will rename these fields to "BON Engineering" (Whereas it would normally display the name of the person the software is licensed to).  This is seen in the screenshot above.</p>
-							   <h3>Ekahau Remote RF Checker</h3>
-							   <p>There are many caveats with this initiative, as you will identify yourself throughout the explanation.</p>
-							   <p>Using a predictive design, update the transmit power and channel allocation of each access point.  This is done by connecting to the wireless controller and retrieving the information weekly and updating the Ekahau project file.</p>
-							   <p>This helps operation teams to monitor the status of the RF in a particular site based on real-world values</p>
-							   <p>Some caveats to get you started:<ul style="font-size:15px; margin-top: -30px;">
-							   <i> <li>Design must be validated against a passive survey to demonstrate and ensure accuracy</li>
-								  <li>Initiative assumes the physical attributes of the site remain the same, with no major changes within the facility</li>
-								  <li>Should not be used as a replacement to a passive survey (does not account for neighbouring access points for example)</li>
-							   </ul></i>
-							   </p>
-							</article>
-
-
-						<!-- Elements -->
-							<article id="elements">
-								<h2 class="major">Elements</h2>
-
-								<section>
-									<h3 class="major">Text</h3>
-									<p>This is <b>bold</b> and this is <strong>strong</strong>. This is <i>italic</i> and this is <em>emphasized</em>.
-									This is <sup>superscript</sup> text and this is <sub>subscript</sub> text.
-									This is <u>underlined</u> and this is code: <code>for (;;) { ... }</code>. Finally, <a href="#">this is a link</a>.</p>
-									<hr />
-									<h2>Heading Level 2</h2>
-									<h3>Heading Level 3</h3>
-									<h4>Heading Level 4</h4>
-									<h5>Heading Level 5</h5>
-									<h6>Heading Level 6</h6>
-									<hr />
-									<h4>Blockquote</h4>
-									<blockquote>Fringilla nisl. Donec accumsan interdum nisi, quis tincidunt felis sagittis eget tempus euismod. Vestibulum ante ipsum primis in faucibus vestibulum. Blandit adipiscing eu felis iaculis volutpat ac adipiscing accumsan faucibus. Vestibulum ante ipsum primis in faucibus lorem ipsum dolor sit amet nullam adipiscing eu felis.</blockquote>
-									<h4>Preformatted</h4>
-									<pre><code>i = 0;
-
-while (!deck.isInOrder()) {
-    print 'Iteration ' + i;
-    deck.shuffle();
-    i++;
-}
-
-print 'It took ' + i + ' iterations to sort the deck.';</code></pre>
-								</section>
-
-								<section>
-									<h3 class="major">Lists</h3>
-
-									<h4>Unordered</h4>
-									<ul>
-										<li>Dolor pulvinar etiam.</li>
-										<li>Sagittis adipiscing.</li>
-										<li>Felis enim feugiat.</li>
-									</ul>
-
-									<h4>Alternate</h4>
-									<ul class="alt">
-										<li>Dolor pulvinar etiam.</li>
-										<li>Sagittis adipiscing.</li>
-										<li>Felis enim feugiat.</li>
-									</ul>
-
-									<h4>Ordered</h4>
-									<ol>
-										<li>Dolor pulvinar etiam.</li>
-										<li>Etiam vel felis viverra.</li>
-										<li>Felis enim feugiat.</li>
-										<li>Dolor pulvinar etiam.</li>
-										<li>Etiam vel felis lorem.</li>
-										<li>Felis enim et feugiat.</li>
-									</ol>
-									<h4>Icons</h4>
-									<ul class="icons">
-										<li><a href="#" class="icon brands fa-twitter"><span class="label">Twitter</span></a></li>
-										<li><a href="#" class="icon brands fa-facebook-f"><span class="label">Facebook</span></a></li>
-										<li><a href="#" class="icon brands fa-instagram"><span class="label">Instagram</span></a></li>
-										<li><a href="#" class="icon brands fa-github"><span class="label">Github</span></a></li>
-									</ul>
-
-									<h4>Actions</h4>
-									<ul class="actions">
-										<li><a href="#" class="button primary">Default</a></li>
-										<li><a href="#" class="button">Default</a></li>
-									</ul>
-									<ul class="actions stacked">
-										<li><a href="#" class="button primary">Default</a></li>
-										<li><a href="#" class="button">Default</a></li>
-									</ul>
-								</section>
-
-								<section>
-									<h3 class="major">Table</h3>
-									<h4>Default</h4>
-									<div class="table-wrapper">
-										<table>
-											<thead>
-												<tr>
-													<th>Name</th>
-													<th>Description</th>
-													<th>Price</th>
-												</tr>
-											</thead>
-											<tbody>
-												<tr>
-													<td>Item One</td>
-													<td>Ante turpis integer aliquet porttitor.</td>
-													<td>29.99</td>
-												</tr>
-												<tr>
-													<td>Item Two</td>
-													<td>Vis ac commodo adipiscing arcu aliquet.</td>
-													<td>19.99</td>
-												</tr>
-												<tr>
-													<td>Item Three</td>
-													<td> Morbi faucibus arcu accumsan lorem.</td>
-													<td>29.99</td>
-												</tr>
-												<tr>
-													<td>Item Four</td>
-													<td>Vitae integer tempus condimentum.</td>
-													<td>19.99</td>
-												</tr>
-												<tr>
-													<td>Item Five</td>
-													<td>Ante turpis integer aliquet porttitor.</td>
-													<td>29.99</td>
-												</tr>
-											</tbody>
-											<tfoot>
-												<tr>
-													<td colspan="2"></td>
-													<td>100.00</td>
-												</tr>
-											</tfoot>
-										</table>
-									</div>
-
-									<h4>Alternate</h4>
-									<div class="table-wrapper">
-										<table class="alt">
-											<thead>
-												<tr>
-													<th>Name</th>
-													<th>Description</th>
-													<th>Price</th>
-												</tr>
-											</thead>
-											<tbody>
-												<tr>
-													<td>Item One</td>
-													<td>Ante turpis integer aliquet porttitor.</td>
-													<td>29.99</td>
-												</tr>
-												<tr>
-													<td>Item Two</td>
-													<td>Vis ac commodo adipiscing arcu aliquet.</td>
-													<td>19.99</td>
-												</tr>
-												<tr>
-													<td>Item Three</td>
-													<td> Morbi faucibus arcu accumsan lorem.</td>
-													<td>29.99</td>
-												</tr>
-												<tr>
-													<td>Item Four</td>
-													<td>Vitae integer tempus condimentum.</td>
-													<td>19.99</td>
-												</tr>
-												<tr>
-													<td>Item Five</td>
-													<td>Ante turpis integer aliquet porttitor.</td>
-													<td>29.99</td>
-												</tr>
-											</tbody>
-											<tfoot>
-												<tr>
-													<td colspan="2"></td>
-													<td>100.00</td>
-												</tr>
-											</tfoot>
-										</table>
-									</div>
-								</section>
-
-								<section>
-									<h3 class="major">Buttons</h3>
-									<ul class="actions">
-										<li><a href="#" class="button primary">Primary</a></li>
-										<li><a href="#" class="button">Default</a></li>
-									</ul>
-									<ul class="actions">
-										<li><a href="#" class="button">Default</a></li>
-										<li><a href="#" class="button small">Small</a></li>
-									</ul>
-									<ul class="actions">
-										<li><a href="#" class="button primary icon solid fa-download">Icon</a></li>
-										<li><a href="#" class="button icon solid fa-download">Icon</a></li>
-									</ul>
-									<ul class="actions">
-										<li><span class="button primary disabled">Disabled</span></li>
-										<li><span class="button disabled">Disabled</span></li>
-									</ul>
-								</section>
-
-								<section>
-									<h3 class="major">Form</h3>
-									<form method="post" action="#">
-										<div class="fields">
-											<div class="field half">
-												<label for="demo-name">Name</label>
-												<input type="text" name="demo-name" id="demo-name" value="" placeholder="Jane Doe" />
-											</div>
-											<div class="field half">
-												<label for="demo-email">Email</label>
-												<input type="email" name="demo-email" id="demo-email" value="" placeholder="jane@untitled.tld" />
-											</div>
-											<div class="field">
-												<label for="demo-category">Category</label>
-												<select name="demo-category" id="demo-category">
-													<option value="">-</option>
-													<option value="1">Manufacturing</option>
-													<option value="1">Shipping</option>
-													<option value="1">Administration</option>
-													<option value="1">Human Resources</option>
-												</select>
-											</div>
-											<div class="field half">
-												<input type="radio" id="demo-priority-low" name="demo-priority" checked>
-												<label for="demo-priority-low">Low</label>
-											</div>
-											<div class="field half">
-												<input type="radio" id="demo-priority-high" name="demo-priority">
-												<label for="demo-priority-high">High</label>
-											</div>
-											<div class="field half">
-												<input type="checkbox" id="demo-copy" name="demo-copy">
-												<label for="demo-copy">Email me a copy</label>
-											</div>
-											<div class="field half">
-												<input type="checkbox" id="demo-human" name="demo-human" checked>
-												<label for="demo-human">Not a robot</label>
-											</div>
-											<div class="field">
-												<label for="demo-message">Message</label>
-												<textarea name="demo-message" id="demo-message" placeholder="Enter your message" rows="6"></textarea>
-											</div>
-										</div>
-										<ul class="actions">
-											<li><input type="submit" value="Send Message" class="primary" /></li>
-											<li><input type="reset" value="Reset" /></li>
-										</ul>
-									</form>
-								</section>
-
-							</article>
-
-					</div>
-
-				<!-- Footer -->
-					<footer id="footer">
-					</footer>
-
-			</div>
-
-		<!-- BG -->
-			<div id="bg"></div>
-
-		<!-- Scripts -->
-			<script src="assets/js/jquery.min.js"></script>
-			<script src="assets/js/browser.min.js"></script>
-			<script src="assets/js/breakpoints.min.js"></script>
-			<script src="assets/js/util.js"></script>
-			<script src="assets/js/main.js"></script>
-
-	</body>
+<script src="schema-model.js"></script>
+<script src="landing.js"></script>
+</body>
 </html>
